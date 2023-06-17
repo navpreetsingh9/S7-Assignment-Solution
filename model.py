@@ -67,8 +67,8 @@ class Net2(nn.Module):
             nn.Dropout(dropout_value),
         )
         self.gap = nn.Sequential(
-            nn.AvgPool2d(3),
-            nn.Conv2d(18, 10, 1)
+            nn.AvgPool2d(3), # 5>1 | 30>38 | 4>12
+            nn.Conv2d(18, 10, 1) # 1>1 | 38>38 | 12>12
         )
 
     def forward(self, x):
@@ -123,15 +123,15 @@ class Net3(nn.Module):
             nn.ReLU(),
             nn.BatchNorm2d(13),
             nn.Dropout(dropout_value),
-            nn.MaxPool2d(2, 2),
-            nn.Conv2d(13, 13, 3, padding=1), # 7>7 | 38>46 | 4>4
+            nn.MaxPool2d(2, 2), # 7>3 | 38>42 | 4>8
+            nn.Conv2d(13, 13, 3, padding=1), # 3>3 | 42>58 | 8>8
             nn.ReLU(),
             nn.BatchNorm2d(13),
             nn.Dropout(dropout_value),
         )
         self.gap = nn.Sequential(
-            nn.AvgPool2d(3),
-            nn.Conv2d(13, 10, 1)
+            nn.AvgPool2d(3), # 3>1 | 58>74 | 8>24
+            nn.Conv2d(13, 10, 1) # 1>1 | 74>74 | 24>24
         )
 
     def forward(self, x):
